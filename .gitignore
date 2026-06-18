@@ -1,0 +1,7 @@
+venv/
+__pycache__/
+*.pyc
+current_location.txt
+destination.txt
+original_source.txt
+progress.txt

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Indoor Campus Navigation</title>
+
+    <link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}">
+    <meta http-equiv="refresh" content="5">
+</head>
+
+<body>
+
+    <h1>Indoor Campus Navigation</h1>
+    <form method="POST">
+
+        <select name="source">
+            <option value="{{source}}">
+                {{source}}
+            </option>
+         <!--{% for node in nodes %}
+
+            <option value="{{ node }}">
+             {{ node }}
+            </option>
+
+         {% endfor %}-->
+
+        </select>
+
+    <select name="destination">
+         <option value="">Select your destination</option>
+
+        {% for node in nodes %}
+
+            <option value="{{ node }}">
+                {{ node }}
+            </option>
+
+        {% endfor %}
+
+    </select>
+
+    <button type="submit">
+        Navigate
+    </button>
+
+</form>
+
+    <div class="map-container">
+
+        <canvas id="mapCanvas"></canvas>
+
+    </div>
+
+    <script>
+const canvas = document.getElementById("mapCanvas");
+const ctx = canvas.getContext("2d");
+const img = new Image();
+
+// timestamp prevents browser caching old image
+img.src = "{{ url_for('static', filename='output.png') }}?t={{ time }}";
+
+const markerX = {{ marker_x }};
+const markerY = {{ marker_y }};
+const coordinates = {{ path | tojson }};
+
+img.onload = function () {
+    canvas.width = img.width;
+    canvas.height = img.height;
+
+    // Draw map
+    ctx.drawImage(img, 0, 0);
+
+    // Draw current location marker
+    ctx.beginPath();
+    ctx.arc(markerX, markerY, 15, 0, 2 * Math.PI);
+    ctx.fillStyle = "blue";
+    ctx.fill();
+
+    // Draw route
+    if (coordinates.length > 0) {
+        ctx.beginPath();
+        ctx.moveTo(coordinates[0][0], coordinates[0][1]);
+
+        for (let i = 1; i < coordinates.length; i++) {
+            ctx.lineTo(coordinates[i][0], coordinates[i][1]);
+        }
+
+        ctx.strokeStyle = "red";
+        ctx.lineWidth = 6;
+        ctx.lineCap = "round";
+        ctx.lineJoin = "round";
+        ctx.stroke();
+
+        // Start point
+        ctx.beginPath();
+        ctx.arc(coordinates[0][0], coordinates[0][1], 10, 0, 2 * Math.PI);
+        ctx.fillStyle = "green";
+        ctx.fill();
+
+        // End point
+        let last = coordinates[coordinates.length - 1];
+        ctx.beginPath();
+        ctx.arc(last[0], last[1], 10, 0, 2 * Math.PI);
+        ctx.fillStyle = "blue";
+        ctx.fill();
+    }
+}
+</script>
+
+</body>
+</html>
