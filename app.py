@@ -112,6 +112,13 @@ def update_rssi():
 # Welcome page
 @app.route("/")
 def welcome():
+     # If QR code included a source parameter, use it
+    qr_source = request.args.get("source")
+    if qr_source:
+        with open("current_location.txt", "w") as f:
+            f.write(qr_source)
+        print("Source set from QR scan:", qr_source)
+
     try:
         with open("current_location.txt", "r") as file:
             source = file.read().strip()
