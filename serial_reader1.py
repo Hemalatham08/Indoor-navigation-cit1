@@ -7,7 +7,7 @@ FLASK_URL = "http://127.0.0.1:5000/update_rssi"
 
 # Add all 3 COM ports here
 PORTS = [
-    "COM7",  # Gate1 ESP32
+    "COM6",  # Gate1 ESP32
     "COM3",  # MainBlock ESP32  
     #"COM5",  # Auditorium ESP32
 ]

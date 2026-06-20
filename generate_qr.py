@@ -22,9 +22,9 @@ import qrcode
  #   qr.save(f"static/{location}.png")
 #    print("Created QR for", location)
 #data = "http://127.0.0.1:5000/?source=MainBlock"
-data="https://indoor-navigation-cit1.onrender.com/?source=MainBlock"
+data="https://indoor-navigation-cit1.onrender.com/?source=Gate1"
 img = qrcode.make(data)
 
-img.save("static/MainBlock_qr_render.png")
+img.save("static/Gate1_qr_render.png")
 
 print("QR Created")
