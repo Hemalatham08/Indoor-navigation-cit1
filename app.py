@@ -101,12 +101,18 @@ def current_location():
 
 @app.route("/update_rssi", methods=["POST"])
 def update_rssi():
+    print("================================")
+    print("UPDATE_RSSI ENDPOINT HIT")
     data = request.json
+    print("RAW DATA:", data)
     node = data["node"]
     rssi = data["rssi"]
+    print("NODE:", node)
+    print("RSSI:", rssi)
     rssi_data[node] = rssi
     update_current_location()
-    print(rssi_data)
+    print("RSSI TABLE:", rssi_data)
+    print("================================")
     return jsonify({"status": "ok"})
 
 # Welcome page

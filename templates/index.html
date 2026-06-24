@@ -60,7 +60,7 @@ const img = new Image();
 // timestamp prevents browser caching old image
 img.src = "{{ url_for('static', filename='output.png') }}?t={{ time }}";
 
-const markerX = {{ marker_x }};
+const markerX = {{marker_x}};
 const markerY = {{ marker_y }};
 const coordinates = {{ path | tojson }};
 
