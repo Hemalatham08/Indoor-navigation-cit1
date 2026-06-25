@@ -326,7 +326,10 @@ def update_gps():
         "status": "ok"
     })
 
+@app.route("/gps_debug")
+def gps_debug():
 
+    return jsonify(gps_data)
 if __name__ == "__main__":
     app.run(
         host="0.0.0.0",

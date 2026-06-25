@@ -5,7 +5,7 @@
     <title>Indoor Campus Navigation</title>
 
     <link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}">
-    <meta http-equiv="refresh" content="5">
+    <!--<meta http-equiv="refresh" content="5">-->
 </head>
 
 <body>
@@ -105,8 +105,7 @@ img.onload = function () {
         ctx.fillStyle = "blue";
         ctx.fill();
     }
-}
-<script>
+;}
 
 navigator.geolocation.watchPosition(
 
@@ -142,7 +141,6 @@ function(error)
     enableHighAccuracy: true
 });
 
-</script>
 </script>
 
 </body>
