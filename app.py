@@ -5,7 +5,10 @@ rssi_data = {
     "MainBlock": -100,
     "Auditorium": -100
 }
-
+gps_data = {
+    "lat": 0,
+    "lon": 0
+}
 def reset_map():
     try:
         shutil.copy(
@@ -305,7 +308,23 @@ def debug():
         "original_source": original,
         "progress": progress
     })
+@app.route("/update_gps", methods=["POST"])
+def update_gps():
 
+    data = request.json
+
+    gps_data["lat"] = data["lat"]
+    gps_data["lon"] = data["lon"]
+
+    print(
+        "GPS Received:",
+        gps_data["lat"],
+        gps_data["lon"]
+    )
+
+    return jsonify({
+        "status": "ok"
+    })
 
 
 if __name__ == "__main__":

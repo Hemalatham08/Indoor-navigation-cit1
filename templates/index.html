@@ -106,6 +106,43 @@ img.onload = function () {
         ctx.fill();
     }
 }
+<script>
+
+navigator.geolocation.watchPosition(
+
+function(position)
+{
+    fetch("/update_gps",
+    {
+        method: "POST",
+
+        headers:
+        {
+            "Content-Type":
+            "application/json"
+        },
+
+        body: JSON.stringify(
+        {
+            lat:
+            position.coords.latitude,
+
+            lon:
+            position.coords.longitude
+        })
+    });
+},
+
+function(error)
+{
+    console.log(error);
+},
+
+{
+    enableHighAccuracy: true
+});
+
+</script>
 </script>
 
 </body>
